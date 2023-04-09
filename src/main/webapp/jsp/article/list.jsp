@@ -15,10 +15,22 @@ List<Map<String, Object>> articleRows = (List<Map<String, Object>>) request.getA
 <body>
 <h1>게시물 리스트</h1>
 
-<ul>
-<%for(int i = articleRows.size()-1; i>=0; i--) {%>
-<li>번호 : <%=articleRows.get(i).get("id")%>번 <br /> 작성 날짜 : <%=articleRows.get(i).get("regDate")%> <br /> 제목 :  <%=articleRows.get(i).get("title")%> <br /> 내용 : <%=articleRows.get(i).get("body")%></li>
-<%} %>
-</ul>
+<table style="border-collapse:collapse; border-color: green"" border="2px">
+	<tr>
+		<th>번호</th>
+		<th>작성날짜</th>
+		<th>제목</th>
+	</tr>
+	<%for(Map<String,Object> articleRow : articleRows) { %>
+	<tr style="text-align: center;">
+		<td><%=articleRow.get("id") %></td>
+		<td><%=articleRow.get("regDate") %></td>
+		<td><a href="detail?id=<%=articleRow.get("id") %>"><%=articleRow.get("title") %></a></td>
+		<td><a href="delete?id=<%=articleRow.get("id") %>">delete</a></td>
+	</tr>
+	<%
+	}
+	%>
+	</table>
 </body>
 </html>

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.KoreaIT.java.jam.util.DBUtil;
+import com.KoreaIT.java.jam.util.SecSql;
 
 @WebServlet("/article/list")
 public class ArticleListServlet extends HttpServlet {
@@ -43,12 +44,12 @@ public class ArticleListServlet extends HttpServlet {
 		try {
 			conn = DriverManager.getConnection(url, user, password);
 
+
+			SecSql sql = SecSql.from("SELECT *");
+			sql.append("FROM article");
+			sql.append("ORDER BY id DESC;");
 			
-			DBUtil dbUtil = new DBUtil(request, response);
-			
-			String sql = "SELECT * FROM article;";
-			
-			List<Map<String, Object>> articleRows = dbUtil.selectRows(conn, sql); 
+			List<Map<String, Object>> articleRows = DBUtil.selectRows(conn, sql); 
 			
 			response.getWriter().append(articleRows.toString());
 			// 서블릿에서 jsp에 뭔가를 알려줘야할때
