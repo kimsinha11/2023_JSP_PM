@@ -16,12 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.KoreaIT.java.jam.util.DBUtil;
 import com.KoreaIT.java.jam.util.SecSql;
 
-@WebServlet("/article/delete")
-public class ArticleDeleteServlet extends HttpServlet {
-
+@WebServlet("/article/dodelete")
+public class ArticleDoDeleteServlet extends HttpServlet {
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 
 		// DB 연결
@@ -48,7 +49,7 @@ public class ArticleDeleteServlet extends HttpServlet {
 			sql.append("WHERE id = ?;", id);
 
 			DBUtil.delete(conn, sql);
-
+			
 			response.getWriter().append(String.format("<script>alert('%d번 글이 삭제되었습니다.'); location.replace('list');</script>", id));
 			
 		} catch (SQLException e) {
@@ -63,5 +64,9 @@ public class ArticleDeleteServlet extends HttpServlet {
 			}
 		}
 	}
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		doGet(request, response);
+	}
 }
