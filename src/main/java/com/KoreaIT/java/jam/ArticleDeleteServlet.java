@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.KoreaIT.java.jam.util.DBUtil;
 import com.KoreaIT.java.jam.util.SecSql;
 
-@WebServlet("/article/list")
-public class ArticleListServlet extends HttpServlet {
+@WebServlet("/article/delete")
+public class ArticleDeleteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -42,18 +42,15 @@ public class ArticleListServlet extends HttpServlet {
 			conn = DriverManager.getConnection(url, user, password);
 
 			response.getWriter().append("Success!!!");
-
-			SecSql sql = SecSql.from("SELECT *");
+			int id = Integer.parseInt(request.getParameter("id"));
+			SecSql sql = SecSql.from("DELETE ");
 			sql.append("FROM article");
-			sql.append("ORDER BY id DESC;");
+			sql.append("WHERE id = ?;", id);
 
-			List<Map<String, Object>> articleRows = DBUtil.selectRows(conn, sql);
+			DBUtil.delete(conn, sql);
 
-			response.getWriter().append(articleRows.toString());
-
-			request.setAttribute("articleRows", articleRows);
-			request.getRequestDispatcher("/jsp/article/list.jsp").forward(request, response);
-
+			response.getWriter().append(String.format("<script>alert('%d번 글이 삭제되었습니다.'); location.replace('list');</script>", id));
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
