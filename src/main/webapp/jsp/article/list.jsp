@@ -27,10 +27,10 @@ if (pageNum == null) { // 클릭한게 없으면 1번 페이지
 
 	<h1>게시물 리스트</h1>
 	<div style="border: 1px solid black; display: inline-block; width: 10%; text-align: center;">
-		<a  href="../home/main">메인페이지로 이동</a>
+		<a style="display: block;" href="../home/main">메인페이지로 이동</a>
 	</div>
 	<div style="border: 1px solid black; display: inline-block; width: 10%; text-align: center;"class="write">
-		<a  href="write">글쓰기</a>
+		<a style="display: block;" href="write">글쓰기</a>
 
 	</div>
 <br /><br />
