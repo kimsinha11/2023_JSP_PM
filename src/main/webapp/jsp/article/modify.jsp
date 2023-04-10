@@ -11,7 +11,7 @@ Map<String, Object> articleRow = (Map<String, Object>) request.getAttribute("art
 <meta charset="UTF-8">
 <title>게시물 수정</title>
 </head>
-<body>
+<body style= "text-align: center;">
 	<div>
 		<a href="../home/main">메인페이지로 이동</a>
 	</div>
